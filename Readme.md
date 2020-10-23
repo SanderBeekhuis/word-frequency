@@ -20,5 +20,5 @@ pipenv run python ./src/main.py
 
 # Tests
 ```
-pipenv run pytest
+pipenv run python -m pytest 
 ```

@@ -37,9 +37,7 @@ class WordFrequencyAnalyzer:
 
 
 class WordFrequency:
-    # It is better to use a named tuple here i.s.o coding this data-class myself.
-    # However that would offend the task requirements
-
-    def __init__(self, word: str, frequency: int):
+    # The task suggests to use getters. I've chosen not to since it is unpythonic.
+    def __init__(self, word, frequency):
         self.word = word
         self.frequency = frequency

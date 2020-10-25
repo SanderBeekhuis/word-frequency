@@ -7,23 +7,45 @@ class WordFrequencyAnalyzer:
 
     @staticmethod
     def calculate_highest_frequency(text):
-        freqencies = WordFrequencyAnalyzer._analyze_text(text)
-        return max(freqencies.values())
+        frequency_dict = WordFrequencyAnalyzer._analyze_text(text)
+        return max(frequency_dict.values())
 
     @staticmethod
     def calculate_frequency_for_word(text, word):
-        frequencies = WordFrequencyAnalyzer._analyze_text(text)
+        frequency_dict = WordFrequencyAnalyzer._analyze_text(text)
         word = str.lower(word)
 
-        return dict.get(frequencies, word, 0)
+        return dict.get(frequency_dict, word, 0)
+
+    @staticmethod
+    def calculate_most_frequent_n_words(text, n):
+        frequency_dict = WordFrequencyAnalyzer._analyze_text(text)
+        frequencies = map(lambda word: WordFrequency(word, frequency_dict[word]), frequency_dict)
+        frequencies = sorted(frequencies, key=lambda e: (-e.get_frequency(), e.get_word()))
+        return frequencies[:n]
 
     @staticmethod
     def _analyze_text(text):
         lower_text = str.lower(text)
         words = re.findall("[a-zA-Z]+", lower_text)
 
-        frequencies = {}
+        frequency_dict = {}
         for word in words:
-            frequencies[word] = frequencies.setdefault(word, 0) + 1
+            frequency_dict[word] = frequency_dict.setdefault(word, 0) + 1
 
-        return frequencies
+        return frequency_dict
+
+
+class WordFrequency:
+    # It is better to use a named tuple here i.s.o coding this data-class myself.
+    # However that would offend the task requirements
+
+    def __init__(self, word: str, frequency: int):
+        self.word = word
+        self.frequency = frequency
+
+    def get_word(self):
+        return self.word
+
+    def get_frequency(self):
+        return self.frequency

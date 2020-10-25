@@ -21,7 +21,7 @@ class WordFrequencyAnalyzer:
     def calculate_most_frequent_n_words(text, n):
         frequency_dict = WordFrequencyAnalyzer._analyze_text(text)
         frequencies = map(lambda word: WordFrequency(word, frequency_dict[word]), frequency_dict)
-        frequencies = sorted(frequencies, key=lambda e: (-e.get_frequency(), e.get_word()))
+        frequencies = sorted(frequencies, key=lambda e: (-e.frequency, e.word))
         return frequencies[:n]
 
     @staticmethod
@@ -43,9 +43,3 @@ class WordFrequency:
     def __init__(self, word: str, frequency: int):
         self.word = word
         self.frequency = frequency
-
-    def get_word(self):
-        return self.word
-
-    def get_frequency(self):
-        return self.frequency

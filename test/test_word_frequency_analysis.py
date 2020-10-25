@@ -30,11 +30,19 @@ def test_calculate_frequency_for_word(text, word, expected):
             "The sun shines over the lake", 3,
             [wfa.WordFrequency("the", 2), wfa.WordFrequency("lake", 1), wfa.WordFrequency("over", 1)]
         ),
+        (
+            "Some words are created more equal then some other words", 2,
+            [wfa.WordFrequency("some", 2), wfa.WordFrequency("words", 2)]
+        ),
+        (
+            "hi ha ho_ha ho\thi hi", 99,
+            [wfa.WordFrequency("hi", 3), wfa.WordFrequency("ha", 2), wfa.WordFrequency("ho", 2)]
+        ),
     ])
 def test_calculate_most_frequent_n_words(text, n, expectations):
     results = wfa.WordFrequencyAnalyzer.calculate_most_frequent_n_words(text, n)
 
     assert len(results) == len(expectations)
     for result, expectation in zip(results, expectations):
-        assert result.get_word() == expectation.get_word()
-        assert result.get_frequency() == expectation.get_frequency()
+        assert result.word == expectation.word
+        assert result.frequency == expectation.frequency

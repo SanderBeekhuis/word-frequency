@@ -9,8 +9,9 @@ Obtain:
 
 
 ## Project installation
+Install with `--dev` to be able to run tests.
 ```
-pipenv install
+pipenv install --dev
 ```
 
 # Run

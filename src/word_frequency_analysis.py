@@ -3,23 +3,24 @@ from collections import Counter
 
 
 class WordFrequencyAnalyzer:
-    # The existence of this class does not add any value over a couple of methods in a module.
-    # It is only created to satisfy the task requirements
+    """
+    Class that supplies multiple word frequency analysis tools.
+    """
 
     @staticmethod
-    def calculate_highest_frequency(text):
+    def calculate_highest_frequency(text: str) -> int:
         frequency_dict = WordFrequencyAnalyzer._analyze_text(text)
         return max(frequency_dict.values())
 
     @staticmethod
-    def calculate_frequency_for_word(text, word):
+    def calculate_frequency_for_word(text: str, word: str) -> int:
         frequency_dict = WordFrequencyAnalyzer._analyze_text(text)
         word = str.lower(word)
 
         return dict.get(frequency_dict, word, 0)
 
     @staticmethod
-    def calculate_most_frequent_n_words(text, n):
+    def calculate_most_frequent_n_words(text: str, n: int) -> list['WordFrequency']:
         frequency_dict = WordFrequencyAnalyzer._analyze_text(text)
         frequencies = map(lambda word: WordFrequency(word, frequency_dict[word]), frequency_dict)
         frequencies = sorted(frequencies, key=lambda e: (-e.frequency, e.word))
@@ -33,7 +34,10 @@ class WordFrequencyAnalyzer:
 
 
 class WordFrequency:
-    # The task suggests to use getters. I've chosen not to since it is unpythonic.
+    """
+    Container class for word and frequency data
+    """
+
     def __init__(self, word, frequency):
         self.word = word
         self.frequency = frequency

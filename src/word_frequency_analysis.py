@@ -7,22 +7,19 @@ class WordFrequencyAnalyzer:
     Class that supplies multiple word frequency analysis tools.
     """
 
-    @staticmethod
-    def calculate_highest_frequency(text: str) -> int:
-        frequency_dict = WordFrequencyAnalyzer._analyze_text(text)
-        return max(frequency_dict.values())
+    def __init__(self, text: str):
+        self.frequencies = WordFrequencyAnalyzer._analyze_text(text)
 
-    @staticmethod
-    def calculate_frequency_for_word(text: str, word: str) -> int:
-        frequency_dict = WordFrequencyAnalyzer._analyze_text(text)
+    def calculate_highest_frequency(self) -> int:
+        return max(self.frequencies.values())
+
+    def calculate_frequency_for_word(self, word: str) -> int:
         word = str.lower(word)
 
-        return dict.get(frequency_dict, word, 0)
+        return dict.get(self.frequencies, word, 0)
 
-    @staticmethod
-    def calculate_most_frequent_n_words(text: str, n: int) -> list['WordFrequency']:
-        frequency_dict = WordFrequencyAnalyzer._analyze_text(text)
-        frequencies = map(lambda word: WordFrequency(word, frequency_dict[word]), frequency_dict)
+    def calculate_most_frequent_n_words(self, n: int) -> list['WordFrequency']:
+        frequencies = map(lambda word: WordFrequency(word, self.frequencies[word]), self.frequencies)
         frequencies = sorted(frequencies, key=lambda e: (-e.frequency, e.word))
         return frequencies[:n]
 

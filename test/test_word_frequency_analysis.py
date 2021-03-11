@@ -12,7 +12,7 @@ import pytest
         ("The sun shines over the lake", 2)
     ])
 def test_calculate_highest_frequency(text, expected):
-    assert wfa.WordFrequencyAnalyzer.calculate_highest_frequency(text) == expected
+    assert wfa.WordFrequencyAnalyzer(text).calculate_highest_frequency() == expected
 
 
 @pytest.mark.parametrize("text,word,expected", [
@@ -22,7 +22,7 @@ def test_calculate_highest_frequency(text, expected):
     ("The sun shines over the lake", "tHe", 2),
 ])
 def test_calculate_frequency_for_word(text, word, expected):
-    assert wfa.WordFrequencyAnalyzer.calculate_frequency_for_word(text, word) == expected
+    assert wfa.WordFrequencyAnalyzer(text).calculate_frequency_for_word(word) == expected
 
 
 @pytest.mark.parametrize("text,n,expectations", [
@@ -40,7 +40,7 @@ def test_calculate_frequency_for_word(text, word, expected):
         ),
     ])
 def test_calculate_most_frequent_n_words(text, n, expectations):
-    results = wfa.WordFrequencyAnalyzer.calculate_most_frequent_n_words(text, n)
+    results = wfa.WordFrequencyAnalyzer(text).calculate_most_frequent_n_words(n)
 
     assert len(results) == len(expectations)
     for result, expectation in zip(results, expectations):

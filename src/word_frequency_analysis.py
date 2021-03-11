@@ -16,8 +16,7 @@ class WordFrequencyAnalyzer:
 
     @staticmethod
     def _analyze_text(text: str) -> Counter:
-        lower_text = str.lower(text)
-        words = re.findall("[a-zA-Z]+", lower_text)
+        words = re.findall("[a-zA-Z]+", text.lower())
         return Counter(words)
 
     def calculate_highest_frequency(self) -> int:
@@ -35,9 +34,7 @@ class WordFrequencyAnalyzer:
         :param word: The word to calculate the frequency of, case-insensitive.
         :return: The frequency of the provided word.
         """
-        word = str.lower(word)
-
-        return dict.get(self.frequencies, word, 0)
+        return dict.get(self.frequencies, word.lower(), 0)
 
     def calculate_most_frequent_n_words(self, n: int) -> list['WordFrequency']:
         """

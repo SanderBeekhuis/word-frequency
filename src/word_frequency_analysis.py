@@ -25,8 +25,8 @@ class WordFrequencyAnalyzer:
         return dict.get(self.frequencies, word, 0)
 
     def calculate_most_frequent_n_words(self, n: int) -> list['WordFrequency']:
-        frequencies = map(lambda word: WordFrequency(word, self.frequencies[word]), self.frequencies)
-        frequencies = sorted(frequencies, key=lambda e: (-e.frequency, e.word))
+        frequencies = (WordFrequency(word, self.frequencies[word]) for word in self.frequencies)
+        frequencies = sorted(frequencies, key=lambda wf: (-wf.frequency, wf.word))
         return frequencies[:n]
 
 

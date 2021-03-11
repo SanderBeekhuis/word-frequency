@@ -10,6 +10,12 @@ class WordFrequencyAnalyzer:
     def __init__(self, text: str):
         self.frequencies = WordFrequencyAnalyzer._analyze_text(text)
 
+    @staticmethod
+    def _analyze_text(text: str) -> Counter:
+        lower_text = str.lower(text)
+        words = re.findall("[a-zA-Z]+", lower_text)
+        return Counter(words)
+
     def calculate_highest_frequency(self) -> int:
         return max(self.frequencies.values())
 
@@ -22,12 +28,6 @@ class WordFrequencyAnalyzer:
         frequencies = map(lambda word: WordFrequency(word, self.frequencies[word]), self.frequencies)
         frequencies = sorted(frequencies, key=lambda e: (-e.frequency, e.word))
         return frequencies[:n]
-
-    @staticmethod
-    def _analyze_text(text):
-        lower_text = str.lower(text)
-        words = re.findall("[a-zA-Z]+", lower_text)
-        return Counter(words)
 
 
 class WordFrequency:

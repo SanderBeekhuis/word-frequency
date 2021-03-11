@@ -1,4 +1,5 @@
 import re
+from collections import Counter
 
 
 class WordFrequencyAnalyzer:
@@ -28,12 +29,7 @@ class WordFrequencyAnalyzer:
     def _analyze_text(text):
         lower_text = str.lower(text)
         words = re.findall("[a-zA-Z]+", lower_text)
-
-        frequency_dict = {}
-        for word in words:
-            frequency_dict[word] = frequency_dict.setdefault(word, 0) + 1
-
-        return frequency_dict
+        return Counter(words)
 
 
 class WordFrequency:

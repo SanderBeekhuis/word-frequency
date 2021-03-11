@@ -24,6 +24,8 @@ class WordFrequencyAnalyzer:
         """
         :return: The frequency of the most common word in the text
         """
+        if len(self.frequencies) == 0:
+            return 0
         return max(self.frequencies.values())
 
     def calculate_frequency_for_word(self, word: str) -> int:

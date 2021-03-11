@@ -9,7 +9,8 @@ import pytest
         ("newline\nnewline", 2),
         ("case indifference Hi hi HI", 3),
         ("non-whitespace-separator non", 2),
-        ("The sun shines over the lake", 2)
+        ("The sun shines over the lake", 2),
+        ("", 0),
     ])
 def test_calculate_highest_frequency(text, expected):
     assert wfa.WordFrequencyAnalyzer(text).calculate_highest_frequency() == expected
@@ -20,6 +21,7 @@ def test_calculate_highest_frequency(text, expected):
     ("This is a sentence", "not", 0),
     ("The sun shines over the lake", "the", 2),
     ("The sun shines over the lake", "tHe", 2),
+    ("", "word", 0),
 ])
 def test_calculate_frequency_for_word(text, word, expected):
     assert wfa.WordFrequencyAnalyzer(text).calculate_frequency_for_word(word) == expected
@@ -37,6 +39,14 @@ def test_calculate_frequency_for_word(text, word, expected):
         (
             "hi ha ho_ha ho\thi hi", 99,
             [wfa.WordFrequency("hi", 3), wfa.WordFrequency("ha", 2), wfa.WordFrequency("ho", 2)]
+        ),
+        (
+                "The sun shines over the lake", 0,
+                []
+        ),
+        (
+                "", 3,
+                []
         ),
     ])
 def test_calculate_most_frequent_n_words(text, n, expectations):

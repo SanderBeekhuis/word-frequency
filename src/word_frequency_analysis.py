@@ -4,7 +4,7 @@ from collections import Counter
 
 class WordFrequencyAnalyzer:
     """
-    Provides word frequency analysis methods for a provided text.
+    Provides case-insensitive word frequency analysis methods for a provided text.
 
     Calculates an intermediate data structure on construction, speeding up subsequent methods on the same text.
 
